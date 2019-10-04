@@ -2,14 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BeaconApi.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BeaconApi.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class ValuesController : BaseController
     {
+        public ValuesController(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
+        {
+        }
+
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
