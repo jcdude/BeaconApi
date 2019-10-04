@@ -14,7 +14,12 @@ namespace BeaconApi.Data.Models
 
         public int containerId { get; set; }
 
-        public string created_on { get; set; }
+       
+        public string token { get; set; }
+
+        public DateTime token_created_on { get; set; }
+
+        public DateTime created_on { get; set; }
 
         public Container container { get; set; }
     }

@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BeaconApi.Core\BeaconApi.Core.csproj" />
     <ProjectReference Include="..\BeaconApi.Data\BeaconApi.Data.csproj" />
   </ItemGroup>
 
