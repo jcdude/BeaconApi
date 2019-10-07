@@ -18,17 +18,22 @@ namespace BeaconApi.Data.Repositories
         {
             var userData = from user in _applicationDbContext.Users
                            where user.username == username && user.password == password
-                           select user;
-            return userData.FirstOrDefaultAsync().Result.token;
+                           select user.token;
+            return await userData.FirstOrDefaultAsync();
         }
 
         //If the token created or updated date is older then 60 minutes renew token
         public async Task<bool> CheckToken(string token)
         {
+            return await Task.Run(() => CheckTokenExpired(token));
+        }
+
+        private bool CheckTokenExpired(string token)
+        {
             var userData = from user in _applicationDbContext.Users
                            where user.token == token
-                           select user;
-            return userData.FirstOrDefaultAsync().Result.token_created_on > (DateTime.Now.AddHours(-1));
+                           select user.token_created_on;
+            return userData.FirstOrDefault() > (DateTime.Now.AddHours(-1));
         }
     }
 }

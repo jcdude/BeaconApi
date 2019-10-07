@@ -20,18 +20,15 @@ namespace BeaconApi.Api.Controllers
         }
 
         [HttpGet("{username}/{password}")]
-        public ActionResult<string> GetToken(string username, string password)
+        public async Task<ActionResult<string>> GetToken(string username, string password)
         {
-            
+            return await _userService.GetToken(username, password);
         }
 
         [HttpGet("{token}")]
-        public ActionResult<string> CheckToken(string token)
+        public async Task<ActionResult<bool>> CheckToken(string token)
         {
-            var userData = from user in _applicationDbContext.Users
-                           where user.token == token
-                           select user;
-            return userData.FirstOrDefault().token;
+            return await _userService.CheckToken(token);
         }
     }
 }
