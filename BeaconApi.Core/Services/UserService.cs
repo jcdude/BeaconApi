@@ -1,4 +1,5 @@
 ﻿using BeaconApi.Data;
+using BeaconApi.Data.DTOs.User;
 using BeaconApi.Data.Repositories;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,11 @@ namespace BeaconApi.Core.Services
         public async Task<bool> CheckToken(string token)
         {
             return await _userRepository.CheckToken(token);
+        }
+
+        public async Task<List<ContainerDTO>> GetContainers()
+        {
+            return await _userRepository.GetContainers();
         }
     }
 }

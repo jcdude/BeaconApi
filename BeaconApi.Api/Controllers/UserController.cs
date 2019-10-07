@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BeaconApi.Core.Services;
 using BeaconApi.Data;
+using BeaconApi.Data.DTOs.User;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,6 +30,12 @@ namespace BeaconApi.Api.Controllers
         public async Task<ActionResult<bool>> CheckToken(string token)
         {
             return await _userService.CheckToken(token);
+        }
+
+        [HttpGet()]
+        public async Task<ActionResult<List<ContainerDTO>>> GetContainers()
+        {
+            return await _userService.GetContainers();
         }
     }
 }

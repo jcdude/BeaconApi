@@ -4,6 +4,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using BeaconApi.Data.Models;
+using BeaconApi.Data.DTOs.User;
 
 namespace BeaconApi.Data.Repositories
 {
@@ -11,6 +13,13 @@ namespace BeaconApi.Data.Repositories
     {
         public UserRepository(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
         {
+        }
+
+        public async Task<List<ContainerDTO>> GetContainers()
+        {
+            var userData = from container in _applicationDbContext.Containers                           
+                           select new ContainerDTO {id = container.id,containerName = container.containerName };
+            return await userData.ToListAsync();
         }
 
         //Get the token that will be used in each request
@@ -27,6 +36,8 @@ namespace BeaconApi.Data.Repositories
         {
             return await Task.Run(() => CheckTokenExpired(token));
         }
+
+
 
         private bool CheckTokenExpired(string token)
         {

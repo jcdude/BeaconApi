@@ -20,5 +20,7 @@ namespace BeaconApi.Data
         public DbSet<UserBeacon> UserBeacons { get; set; }
 
         public DbSet<Container> Containers { get; set; }
+
+        public DbSet<Role> Roles { get; set; }
     }
 }
